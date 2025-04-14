@@ -34,8 +34,35 @@ public class MyMain {
 				System.out.println(arah);
 			}
 			///////////////////////////////////////////////////////////////////////////
-			else if (4==ch) {}
-			else if (5==ch) {}
+			else if (4==ch) {
+				MyPoint p = new MyPoint(sc.nextDouble(),sc.nextDouble());
+				MyPoint q = new MyPoint(sc.nextDouble(),sc.nextDouble());
+				MyPoint r = new MyPoint(sc.nextDouble(),sc.nextDouble());
+				MyPoint s = new MyPoint(sc.nextDouble(),sc.nextDouble());
+				MyLineSegment l1 = new MyLineSegment(p,q); //segmen garis/vektor dari p ke q
+				MyLineSegment l2 = new MyLineSegment(r,s); //segmen garis/vektor dari r ke s
+				Boolean res= l1.isIntersect(l2);
+				if(res==true){
+					System.out.println("Ya");
+				}
+				else{
+					System.out.println("Tidak");
+				}
+			}
+			else if (5==ch) {//concave/convex
+				int points=sc.nextInt();
+				MyPolygon poly=new MyPolygon();
+				for(int i=0;i<points;i++){
+					poly.addPoint(new MyPoint(sc.nextDouble(),sc.nextDouble()));
+				}
+				boolean res=poly.isConvex();
+				if(res==true){
+					System.out.println("Convex");
+				}
+				else{
+					System.out.println("Concave");
+				}
+			}
 			else if (6==ch) {}
 			else if (7==ch) {}
 			else if (8==ch) {}			

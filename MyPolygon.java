@@ -19,6 +19,7 @@ public class MyPolygon {
      * @return
      */
     boolean addPoint(MyPoint p) {
+        this.Points.add(p);
         return true;
     }
 
@@ -28,7 +29,18 @@ public class MyPolygon {
      */
     boolean isConvex() {
 		boolean convex = true;
-		
+        MyPoint p1,p2,p3;
+        MyLineSegment l1;
+		for(int i=0;i<this.Points.size();i++){
+            p1 = this.Points.get(i);
+            p2 = this.Points.get((i + 1) % this.Points.size());
+            p3 = this.Points.get((i + 2) % this.Points.size());
+            l1=new MyLineSegment(p1, p2);
+            if(l1.leftTurnToPoint(p3)<0){
+                convex=false;
+                break;
+            }
+        }
         return convex;
     }
 
@@ -49,7 +61,7 @@ public class MyPolygon {
      * @return
      */
     boolean isPointInside(MyPoint p) {
-		double inside = true;
+		boolean inside = true;
 		
         return inside;
     }
