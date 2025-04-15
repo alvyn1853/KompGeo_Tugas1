@@ -30,14 +30,17 @@ public class MyPolygon {
      * @return
      */
     boolean isConvex() {
-		boolean convex = true;
-        MyPoint p1,p2,p3;
-        MyLineSegment l1;
+		boolean convex = true;//default
+        MyPoint p1,p2,p3;//titik-titik yang dicek
+        MyLineSegment l1;//segmen garis untuk menghitung
+        //loop semua 3 titik berurut yang ada dalam poligon
 		for(int i=0;i<this.Points.size();i++){
             p1 = this.Points.get(i);
             p2 = this.Points.get((i + 1) % this.Points.size());
             p3 = this.Points.get((i + 2) % this.Points.size());
             l1=new MyLineSegment(p1, p2);
+            //hitung sudut yang dibentuk dari line seg p1 p2 dan titik p3
+            //bila semua ccw maka convex, bila ada yang cw berarti bukan
             if(l1.leftTurnToPoint(p3)<0){
                 convex=false;
                 break;

@@ -19,7 +19,7 @@ public class MyMain {
 				MyPoint q = new MyPoint(sc.nextDouble(),sc.nextDouble());//line segment start
 				MyPoint r = new MyPoint(sc.nextDouble(),sc.nextDouble());//line segment end
 				MyLineSegment l = new MyLineSegment(q,r); //segmen garis/vektor dari q ke r
-				double res=l.distanceToPoint(p);
+				double res=l.distanceToPoint(p);//hitung jarak
 				System.out.printf("%.3f%n", res);//print format 3 belakang koma
 			}
 			///////////////////////////////////////////////////////////////////////////
@@ -36,13 +36,15 @@ public class MyMain {
 			}
 			///////////////////////////////////////////////////////////////////////////
 			else if (4==ch) {
+				//input
 				MyPoint p = new MyPoint(sc.nextDouble(),sc.nextDouble());
 				MyPoint q = new MyPoint(sc.nextDouble(),sc.nextDouble());
 				MyPoint r = new MyPoint(sc.nextDouble(),sc.nextDouble());
 				MyPoint s = new MyPoint(sc.nextDouble(),sc.nextDouble());
 				MyLineSegment l1 = new MyLineSegment(p,q); //segmen garis/vektor dari p ke q
 				MyLineSegment l2 = new MyLineSegment(r,s); //segmen garis/vektor dari r ke s
-				Boolean res= l1.isIntersect(l2);
+				Boolean res= l1.isIntersect(l2);//cek berpotongan
+				//print hasil
 				if(res==true){
 					System.out.println("Ya");
 				}
@@ -51,12 +53,14 @@ public class MyMain {
 				}
 			}
 			else if (5==ch) {//concave/convex
-				int points=sc.nextInt();
-				MyPolygon poly=new MyPolygon();
+				int points=sc.nextInt();//jumlah titik
+				MyPolygon poly=new MyPolygon();//instansiasi poligon
+				//menerima dan memasukkan titik pada poligon
 				for(int i=0;i<points;i++){
 					poly.addPoint(new MyPoint(sc.nextDouble(),sc.nextDouble()));
 				}
-				boolean res=poly.isConvex();
+				boolean res=poly.isConvex();//cek convek
+				//print
 				if(res==true){
 					System.out.println("Convex");
 				}
@@ -65,33 +69,33 @@ public class MyMain {
 				}
 			}
 			else if (6==ch) {
-				int points = sc.nextInt() ;
-				MyPolygon polygon = new MyPolygon();
-				for(int i = 0; i < points; i++){
+				int points = sc.nextInt() ;//input jml titik
+				MyPolygon polygon = new MyPolygon();//poligon
+				for(int i = 0; i < points; i++){//titik poligon
 					polygon.addPoint(new MyPoint(sc.nextDouble(),sc.nextDouble())) ;
 				}
-				double res = polygon.area();
-    			System.out.printf("%.3f%n", res);
+				double res = polygon.area();//hitung luas
+    			System.out.printf("%.3f%n", res);//print
 			}
 			else if (7==ch) {
-				int points = sc.nextInt();
-				MyPolygon polygon = new MyPolygon();
-				for (int i = 0; i < points; i++) {
+				int points = sc.nextInt();//input jml titik
+				MyPolygon polygon = new MyPolygon();//poligon
+				for (int i = 0; i < points; i++) {//titik poligon
 					polygon.addPoint(new MyPoint(sc.nextDouble(), sc.nextDouble()));
 				}
-				MyPoint p = new MyPoint(sc.nextDouble(), sc.nextDouble());
-				boolean res = polygon.isPointInside(p);
+				MyPoint p = new MyPoint(sc.nextDouble(), sc.nextDouble());//titik yang dicek
+				boolean res = polygon.isPointInside(p);//cek titik
 				System.out.println(res ? "In" : "Out");
 			}
 			else if (8==ch) {
-				MyPointSet pointSet = new MyPointSet();
-				int n = sc.nextInt();
-				for (int i = 0; i < n; i++) {
+				MyPointSet pointSet = new MyPointSet();//kummpulan titik
+				int n = sc.nextInt();//jumlah input
+				for (int i = 0; i < n; i++) {//loop input
 					pointSet.addPoint(new MyPoint(sc.nextDouble(), sc.nextDouble()));
 				}
-				List<MyPoint> sorted = pointSet.sortByAngle();
-				System.out.println(sorted.size());
-				for (MyPoint p : sorted) {
+				List<MyPoint> sorted = pointSet.sortByAngle();//urut berdasarkan derajat
+				System.out.println(sorted.size());//print jumlah titik
+				for (MyPoint p : sorted) {//print terurut tiap titik
 					System.out.println((int) p.x + " " + (int) p.y);
 				}
 			}			
