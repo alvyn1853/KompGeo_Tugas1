@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MyPolygon {
@@ -45,24 +47,62 @@ public class MyPolygon {
     }
 
     /**
-     * [6b] luas poligon ini
-     * @return
+     * [6b] luas poligon ini menggunakan Triangulasi & Shoelace Formula
+     * @return luas poligon (non-negatif)
      */
     double area() {
-		double area = 0.0;
-		
+        double area = 0.0;
+        MyPoint pivot = Points.get(0); // Titik acuan (bisa titik mana saja di convex hull)
+        
+        for (int i = 1; i < Points.size() - 1; i++) {
+            MyPoint b = Points.get(i);
+            MyPoint c = Points.get(i + 1);
+            // Hitung luas segitiga pivot-b-c menggunakan shoelace
+            double subArea = Math.abs(pivot.x * (b.y - c.y) + b.x * (c.y - pivot.y) + c.x * (pivot.y - b.y)) / 2.0;
+            area += subArea;
+        }
+        
         return area;
     }
 
+    // double area() {
+	// 	double area = 0.0;
+    //     int n = this.Points.size();
+    //     for (int i = 0; i < n; i++) {
+    //         MyPoint current = this.Points.get(i);
+    //         MyPoint next = this.Points.get((i + 1) % n);
+    //         area += (current.x * next.y) - (current.y * next.x);
+    //     }
+    //     return Math.abs(area) / 2.0; // Ambil nilai absolut dan bagi 2
+    // }
+
     /**
-     * [7b] titik p di dalem ato luar,
-     * jika berimpitan dengan titik atau segmen, di dalam 
-     * @param p
-     * @return
+     * [7b] titik p di dalam atau di luar poligon (termasuk tepi)
+     * @param p titik yang akan diperiksa
+     * @return true jika di dalam atau pada tepi, false jika di luar
      */
     boolean isPointInside(MyPoint p) {
-		boolean inside = true;
-		
+        int n = this.Points.size();
+        boolean inside = false;
+        
+        for (int i = 0, j = n - 1; i < n; j = i++) {
+            MyPoint a = this.Points.get(i);
+            MyPoint b = this.Points.get(j);
+            
+            // Cek apakah titik berada tepat di tepi segmen
+            MyLineSegment edge = new MyLineSegment(a, b);
+            if (edge.distanceToPoint(p) <= 1e-9) {
+                return true;
+            }
+            
+            // Ray casting logic
+            if ((a.y > p.y) != (b.y > p.y)) {
+                double intersectX = (b.x - a.x) * (p.y - a.y) / (b.y - a.y) + a.x;
+                if (p.x <= intersectX) {
+                    inside = !inside;
+                }
+            }
+        }
         return inside;
     }
 

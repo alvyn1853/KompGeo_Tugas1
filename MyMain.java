@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class MyMain {
@@ -63,9 +64,37 @@ public class MyMain {
 					System.out.println("Concave");
 				}
 			}
-			else if (6==ch) {}
-			else if (7==ch) {}
-			else if (8==ch) {}			
+			else if (6==ch) {
+				int points = sc.nextInt() ;
+				MyPolygon polygon = new MyPolygon();
+				for(int i = 0; i < points; i++){
+					polygon.addPoint(new MyPoint(sc.nextDouble(),sc.nextDouble())) ;
+				}
+				double res = polygon.area();
+    			System.out.printf("%.3f%n", res);
+			}
+			else if (7==ch) {
+				int points = sc.nextInt();
+				MyPolygon polygon = new MyPolygon();
+				for (int i = 0; i < points; i++) {
+					polygon.addPoint(new MyPoint(sc.nextDouble(), sc.nextDouble()));
+				}
+				MyPoint p = new MyPoint(sc.nextDouble(), sc.nextDouble());
+				boolean res = polygon.isPointInside(p);
+				System.out.println(res ? "In" : "Out");
+			}
+			else if (8==ch) {
+				MyPointSet pointSet = new MyPointSet();
+				int n = sc.nextInt();
+				for (int i = 0; i < n; i++) {
+					pointSet.addPoint(new MyPoint(sc.nextDouble(), sc.nextDouble()));
+				}
+				List<MyPoint> sorted = pointSet.sortByAngle();
+				System.out.println(sorted.size());
+				for (MyPoint p : sorted) {
+					System.out.println((int) p.x + " " + (int) p.y);
+				}
+			}			
 			ch = sc.nextInt();				// pilihan berikutnya
 		}			
         //System.out.println(CG.ccw(p,q,t));
