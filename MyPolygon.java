@@ -65,17 +65,6 @@ public class MyPolygon {
         return area;
     }
 
-    // double area() {
-	// 	double area = 0.0;
-    //     int n = this.Points.size();
-    //     for (int i = 0; i < n; i++) {
-    //         MyPoint current = this.Points.get(i);
-    //         MyPoint next = this.Points.get((i + 1) % n);
-    //         area += (current.x * next.y) - (current.y * next.x);
-    //     }
-    //     return Math.abs(area) / 2.0; // Ambil nilai absolut dan bagi 2
-    // }
-
     /**
      * [7b] titik p di dalam atau di luar poligon (termasuk tepi)
      * @param p titik yang akan diperiksa
